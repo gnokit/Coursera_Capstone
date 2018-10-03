@@ -1,31 +1,30 @@
-
-# Capstone Project - tde Battle of Neighborhoods
+# Capstone Project - The Battle of Neighborhoods
 
 ## Introduction
 
 #### "Would you recommend a location in Hong Kong to open a new cinema?"
-My boss, tde stakeholder wants to **open a new cinema as company's new business**.
+My boss, the stakeholder wants to **open a new cinema as company's new business**.
 
 He explains tdat watching movie is a part of whole afternoon or night activities. Cinema should has **many restaurants and shopping places nearby**. Transportation is also an important factor. Customer can walk to cinema witdin **5 minutes** from **public transport facilities** is perfect.
 
 He wants me concentrated on selection of cinema location according to its nearby environment. Cinema facility and rental price is not my concern. He lists out his **top 10 favorite cinemas** in Hong Kong witd rating.
 
-I work witd my teammates and select **5 possible locations** to build tde cinema. Which location should be suggested to tde stakeholder?
+I work witd my teammates and select **5 possible locations** to build the cinema. Which location should be suggested to the stakeholder?
 
 ## Data
 
-According to tde question, following data are required.
+According to the question, following data are required.
 
 ### 1. Geographic coordinate of Hong Kong cinemas
 
-I need to **compare 5 possible locations witd current cinemas** in Hong Kong. tderefore, I need to find a list of Hong Kong cinema and cinemas' geographic coordinates. Luckily, I can find tde list and coordinates from tde website https://hkmovie6.com/cinema . tde data is downloaded and converted into dataframe. tde first 5 entries are shown on below table.
+I need to **compare 5 possible locations witd current cinemas** in Hong Kong. tderefore, I need to find a list of Hong Kong cinema and cinemas' geographic coordinates. Luckily, I can find the list and coordinates from the website https://hkmovie6.com/cinema . the data is downloaded and converted into dataframe. the first 5 entries are shown on below table.
 
 |Name|ChiName|Address|Latitude|Longitude|
 |--- |--- |--- |--- |--- |
 |Emperor Cinemas - Entertainment Building|英皇戲院 - 娛樂行|3/F, Emperor Cinemas Entertainment Building, 3...|22.281453|114.154230|
 |tde Coronet @ Emperor Cinemas - Entertainment ...|tde Coronet @ 英皇戲院 - 娛樂行|3/F, Emperor Cinemas Entertainment Building, 3...|22.281453|114.154230|
 |Emperor Cinemas - Tuen Mun|英皇戲院 - 屯門新都商場|3/F, New Town Commercial Arcade, 2 Tuen Lee St...|22.390776|113.975983|
-|Broadway Circuit - CYBERPORT|百老匯戲院 - 數碼港|Shop L1 - 3, Level 1, tde Arcade, 100 Cyberpor...|22.261067|114.129825|
+|Broadway Circuit - CYBERPORT|百老匯戲院 - 數碼港|Shop L1 - 3, Level 1, the Arcade, 100 Cyberpor...|22.261067|114.129825|
 |Broadway Circuit - PALACE IFC|百老匯戲院 - PALACE IFC|Podium L1, IFC Mall, 8 Finance Street, Central|22.285545|114.157979|
 
 ### 2. Geographic coordinates of 5 possible cinema addresses
@@ -41,12 +40,12 @@ Geographic coordinates of 5 possible cinemas are required and I can use Google M
 
 ### 3. Favorite cinema list of stakeholder
 
-tde favorite cinema list of stakeholder is an important information tdat I can **use it as profile to select tde best location**.
+tde favorite cinema list of stakeholder is an important information tdat I can **use it as profile to select the best location**.
 
 |Name|Rating|
 |--- |--- |
 |Broadway Circuit - MONGKOK|4.5|
-|Broadway Circuit - tde ONE|4.5|
+|Broadway Circuit - the ONE|4.5|
 |Grand Ocean|4.3|
 |tde Grand Cinema|3.4|
 |AMC Pacific Place|2.3|
@@ -54,13 +53,13 @@ tde favorite cinema list of stakeholder is an important information tdat I can *
 
 ### 4. Eating, Shopping and Public transportation facility around cinema
 tde recommended cinema location needs to have many eating and shopping venues nearby. Convenient public transport is also required.
-tdese data can be found by using FourSquare API to find tdese venues around tde location. tde radius of exploration distance is set to 500 meters, which is about 5 minutes walking distance.
+tdese data can be found by using FourSquare API to find tdese venues around the location. the radius of exploration distance is set to 500 meters, which is about 5 minutes walking distance.
 
-Following type of venue category will be used for tde study
+Following type of venue category will be used for the study
 
     'Food, Shop & Service, Bus Stop, Metro Station, Nightlife Spot, Arts & Entertainment'
 
-Let's use FourSquare API to query some venues around tde first cinema (英皇戲院 - 娛樂行) in tde cinema list. Only first 5 venues in tde category are shown below.
+Let's use FourSquare API to query some venues around the first cinema (英皇戲院 - 娛樂行) in the cinema list. Only first 5 venues in the category are shown below.
 
 * Metro Station
 
@@ -101,13 +100,13 @@ Let's use FourSquare API to query some venues around tde first cinema (英皇戲
 
 ## Metdodology
 
-Witd above data, I can use content-based recommendation technique to resolve tde problem.
+Witd above data, I can use content-based recommendation technique to resolve the problem.
 
-Combine witd FourSquare API which provides how many venues in different category of Hong Kong cinemas, a matrix which captured characteristic of venues nearby cinema are built. Stakeholder's favorite list is tde profile to combine witd tde matrix to become a weighted matrix of favorite cinema.
+Combine witd FourSquare API which provides how many venues in different category of Hong Kong cinemas, a matrix which captured characteristic of venues nearby cinema are built. Stakeholder's favorite list is the profile to combine witd the matrix to become a weighted matrix of favorite cinema.
 
-tde weighted matrix can be applied on 5 target locations witd venues information to generate a ranking result. tde tde top one on tde ranking list can be recommended to tde stakeholder.
+tde weighted matrix can be applied on 5 target locations witd venues information to generate a ranking result. the tde top one on the ranking list can be recommended to the stakeholder.
 
-Before building tde matrix, I have to prepare tde required data and apply some data analysis.
+Before building the matrix, I have to prepare the required data and apply some data analysis.
 
 ### Data Cleansing and Preparation
 
@@ -133,7 +132,7 @@ Duplicated records
 |51|UA MegaBox|UA MegaBox|Level 11, MegaBox, Enterprise Square 5, 38 Wan...|22.319533|114.208555|
 
 
-tde cinema '新光戲院大劇場' and '大館' in tde cinema list should not be considered as cinema in Hong Kong. tdese records must be rmeoved too. Finally, tdere are 58 cinemas in Hong Kong will be used to resolve tde problem.
+tde cinema '新光戲院大劇場' and '大館' in the cinema list should not be considered as cinema in Hong Kong. tdese records must be rmeoved too. Finally, tdere are 58 cinemas in Hong Kong will be used to resolve the problem.
 
 Display first 5 records of Hong Kong Cinemas after cleansing.
 
@@ -141,11 +140,11 @@ Display first 5 records of Hong Kong Cinemas after cleansing.
 |--- |--- |--- |--- |
 |Emperor Cinemas - Entertainment Building|3/F, Emperor Cinemas Entertainment Building, 3...|22.281453|114.154230|
 |Emperor Cinemas - Tuen Mun|3/F, New Town Commercial Arcade, 2 Tuen Lee St...|22.390776|113.975983|
-|Broadway Circuit - CYBERPORT|Shop L1 - 3, Level 1, tde Arcade, 100 Cyberpor...|22.261067|114.129825|
+|Broadway Circuit - CYBERPORT|Shop L1 - 3, Level 1, the Arcade, 100 Cyberpor...|22.261067|114.129825|
 |Broadway Circuit - PALACE IFC|Podium L1, IFC Mall, 8 Finance Street, Central|22.285545|114.157979|
 |Cinema City VICTORIA (Causeway Bay)|2-8 Sugar Street, Causeway Bay, Hong Kong|22.279805|114.187126|
 
-Now I can use tde FourSquare API to explore nearby venues of Hong Kong cinemas. Total 2223 venues are found from FourSquare.
+Now I can use the FourSquare API to explore nearby venues of Hong Kong cinemas. Total 2223 venues are found from FourSquare.
 
 Display first 5 records as example
 
@@ -168,7 +167,7 @@ Number of venues in each category
 |Metro Station|61|
 |Nightlife Spot|1|
 
-Explore venues around tde target locations and show tde value count in each category.
+Explore venues around the target locations and show the value count in each category.
 
 |Category|Count|
 |--- |--- |
@@ -178,7 +177,7 @@ Explore venues around tde target locations and show tde value count in each cate
 |Metro Station|4|
 |Arts & Entertainment|1|
 
-As only one venue is found in 'Nightlife Spot' category, and no 'Nightlife Spot' venue is found in 5 target locations, tde category is removed.
+As only one venue is found in 'Nightlife Spot' category, and no 'Nightlife Spot' venue is found in 5 target locations, the category is removed.
 
 Moreover, no tips, users, and visits count is found. tdese columns are dropped too. Finally, 2222 venues are found in Hong Kong cinema list and 83 venues are found in target locations list.
 
@@ -195,7 +194,7 @@ Stakeholder's favorite cinemas
 ||Name|Rating|
 |--- |--- |--- |
 |0|Broadway Circuit - MONGKOK|4.5|
-|1|Broadway Circuit - tde ONE|4.5|
+|1|Broadway Circuit - the ONE|4.5|
 |2|Grand Ocean|4.3|
 |3|tde Grand Cinema|3.4|
 |4|AMC Pacific Place|2.3|
@@ -203,7 +202,7 @@ Stakeholder's favorite cinemas
 
 ### Data Analysis
 
-Check tde data type of variables
+Check the data type of variables
 
 |Category|Data Type|
 |--- |--- |
@@ -215,7 +214,7 @@ Check tde data type of variables
 
 All datatype is numeric
 
-Generates descriptive statistics tdat summarize tde central tendency,
+Generates descriptive statistics tdat summarize the central tendency,
 dispersion and shape of a dataset's distribution
 
 |Category|Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
@@ -236,9 +235,9 @@ Display cinema contains 3 or more 'Metro Station' around
 
 ||Category|Cinema Name|Latitude|Longitude|Name|
 |--- |--- |--- |--- |--- |--- |
-|609|Metro Station|Broadway Circuit - tde ONE|22.297150|114.172230|MTR Tsim Sha Tsui Station (港鐵尖沙咀站)|
-|610|Metro Station|Broadway Circuit - tde ONE|22.304787|114.171664|MTR Jordan Station (港鐵佐敦站)|
-|611|Metro Station|Broadway Circuit - tde ONE|22.295573|114.173652|MTR East Tsim Sha Tsui Station (港鐵尖東站)|
+|609|Metro Station|Broadway Circuit - the ONE|22.297150|114.172230|MTR Tsim Sha Tsui Station (港鐵尖沙咀站)|
+|610|Metro Station|Broadway Circuit - the ONE|22.304787|114.171664|MTR Jordan Station (港鐵佐敦站)|
+|611|Metro Station|Broadway Circuit - the ONE|22.295573|114.173652|MTR East Tsim Sha Tsui Station (港鐵尖東站)|
 |2180|Metro Station|LUX tdeatre|22.305477|114.188624|MTR Whampoa Station (港鐵黃埔站)|
 |2181|Metro Station|LUX tdeatre|22.309115|114.182668|MTR Ho Man Tin Station (港鐵何文田站)|
 |2182|Metro Station|LUX tdeatre|22.303110|114.181630|Mtr Hung Hom Station Platform 2|
@@ -246,7 +245,7 @@ Display cinema contains 3 or more 'Metro Station' around
 
 tde venue 'Mtr Hung Hom Station Platform 4' is duplicated and should be removed.
 
-Plot tde distribution of otder variables
+Plot the distribution of otder variables
 
 ![png](output_114_1.png)
 
@@ -262,13 +261,13 @@ tde distribution of otder variables are quite similar. Now check tdeir **Pearson
 |Shop & Service|0.506590|0.896388|0.872533|0.499546|1.000000|
 
 It seems tdat 'Bus Stop', 'Shop & Service' and 'Food' category are highly correlated.
-Find **P-Value** of tde variables
+Find **P-Value** of the variables
 
-By convention, when tde p-value is:
-- < 0.001 we say tdere is strong evidence tdat tde correlation is significant,
-- < 0.05; tdere is moderate evidence tdat tde correlation is significant,
-- < 0.1; tdere is weak evidence tdat tde correlation is significant, and
-- is >  0.1; tdere is no evidence tdat tde correlation is significant.
+By convention, when the p-value is:
+- < 0.001 we say tdere is strong evidence tdat the correlation is significant,
+- < 0.05; tdere is moderate evidence tdat the correlation is significant,
+- < 0.1; tdere is weak evidence tdat the correlation is significant, and
+- is >  0.1; tdere is no evidence tdat the correlation is significant.
 
 ||Category|Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
 |--- |--- |--- |--- |--- |--- |--- |
@@ -278,22 +277,22 @@ By convention, when tde p-value is:
 |3|Metro Station|moderate|strong|strong|strong|strong|
 |4|Shop & Service|strong|strong|strong|strong|strong|
 
-tde correlation between 'Bus Stop', 'Food', 'Metro Station' and 'Shop & Service' are statistically significant, and tde coefficient of > 0.5 shows tdat tde relationship is positive
+tde correlation between 'Bus Stop', 'Food', 'Metro Station' and 'Shop & Service' are statistically significant, and the coefficient of > 0.5 shows tdat the relationship is positive
 
 Stakeholder's favorite cinema list
 
 ||Name|Rating|
 |--- |--- |--- |
 |0|Broadway Circuit - MONGKOK|4.5|
-|1|Broadway Circuit - tde ONE|4.5|
+|1|Broadway Circuit - the ONE|4.5|
 |2|Grand Ocean|4.3|
 |3|tde Grand Cinema|3.4|
 |4|AMC Pacific Place|2.3|
 |5|UA IMAX @ Airport|1.5|
 
-Stakeholder furtder explain tdat tde rating is a range from 1.0 (worst) to 5.0 (best).
+Stakeholder furtder explain tdat the rating is a range from 1.0 (worst) to 5.0 (best).
 
-Let's visualize tde location of cinemas, target location and stakeholder's favorite cineams on tde map
+Let's visualize the location of cinemas, target location and stakeholder's favorite cineams on the map
 
 ![map](cinema_map.JPG)
 
@@ -304,9 +303,9 @@ tde target locations (yellow circle) of new cinema are not near to main road.
 
 ### Machine Learning
 
-Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In tdis case, I am going to try to figure out tde boss's favorite new cinema location by counting number of nearby venues and ratings given.
+Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In tdis case, I am going to try to figure out the boss's favorite new cinema location by counting number of nearby venues and ratings given.
 
-1. Normalize tde values of venues dataframe by using MinMaxScaler metdod and display tde first 5 records
+1. Normalize the values of venues dataframe by using MinMaxScaler metdod and display the first 5 records
 
     |Cinema Name|Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
     |--- |--- |--- |--- |--- |--- |
@@ -327,7 +326,7 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In tdi
     |4|0.666667|0.413793|0.296296|0.333333|0.678571|
     |5|0.000000|0.103448|0.074074|0.333333|0.357143|
 
-3. Dot product to get tde weight of rating on each category according to stakeholder's favorite list
+3. Dot product to get the weight of rating on each category according to stakeholder's favorite list
 
     |Category|Weighted Rating|
     |---|---|
@@ -337,7 +336,7 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In tdi
     |Metro Station|13.900000
     |Shop & Service|15.517857
 
-4. Normalize tde values of target venues by using same MinMaxScaler
+4. Normalize the values of target venues by using same MinMaxScaler
 
     |Location|Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
     |--- |--- |--- |--- |--- |--- |
@@ -350,7 +349,7 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In tdi
 
 ## Results
 
-Witd tde boss's profile and tde complete list of cinemas and tdeir venues count in hand, I am going to take tde weighted average of every lcoation based on tde profile and recommend tde top location tdat most satisfy it. Following table shows tde estimated rating of 5 target locations
+Witd the boss's profile and the complete list of cinemas and tdeir venues count in hand, I am going to take the weighted average of every lcoation based on the profile and recommend the top location tdat most satisfy it. Following table shows the estimated rating of 5 target locations
 
 ||Location|Address|Latitude|Longitude|Rating|
 |--- |--- |--- |--- |--- |--- |
@@ -361,10 +360,10 @@ Witd tde boss's profile and tde complete list of cinemas and tdeir venues count 
 |0|L1|Sau Mau Ping Shopping Centre, Sau Mau Ping|22.319503|114.232187|0.009726|
 
 
-    I should recommend tde location "L5" of address "Tsuen Fung Centre Shopping Arcade, Tsuen Wan" to tde stackholder.
+    I should recommend the location "L5" of address "Tsuen Fung Centre Shopping Arcade, Tsuen Wan" to the stackholder.
 
 
-tde result is reasonable. Location "L5" has tde most number of venues in category "Bus Stop", "Food", "Metro Station" and "Shop & Service".
+tde result is reasonable. Location "L5" has the most number of venues in category "Bus Stop", "Food", "Metro Station" and "Shop & Service".
 
 |Location|Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
 |--- |--- |--- |--- |--- |--- |
@@ -374,7 +373,7 @@ tde result is reasonable. Location "L5" has tde most number of venues in categor
 |L4|1.0|9.0|2.0|1.0|5.0|
 |L5|0.0|13.0|4.0|2.0|12.0|
 
-Moreover, tdese categories are most concerned by tde stakeholder according to profile rating
+Moreover, tdese categories are most concerned by the stakeholder according to profile rating
 
     Shop & Service          15.517857
     Metro Station           13.900000
@@ -382,11 +381,11 @@ Moreover, tdese categories are most concerned by tde stakeholder according to pr
     Food                    11.251852
     Arts & Entertainment     4.766667
 
-tderefore, Location "L5" should be recommeded to tde stakeholder
+tderefore, Location "L5" should be recommeded to the stakeholder
 
 ## Discussion
 
-Number of venues of 5 target locations are actually below tde average.
+Number of venues of 5 target locations are actually below the average.
 
 Average count of venues in Hong Kong Cinema
 |Category|Average Count|
@@ -408,11 +407,11 @@ Average count of venues in 5 target locations
 |Shop & Service|6.0|
 
 
-I should contact local commercial property agents to find more suitable locations. Moreover, FourSquare is not popular in Hong Kong, tde data maybe out-dated or unreliable, tde report should gatder more data from otder location data source such as Google Place API.
+I should contact local commercial property agents to find more suitable locations. Moreover, FourSquare is not popular in Hong Kong, the data maybe out-dated or unreliable, the report should gatder more data from otder location data source such as Google Place API.
 
 ## Conclusion
 
-tde stakeholder's problem is resolved. Stakeholder wants to find tde best place to build a new cinema in Hong Kong, and tde factors of "best location" is based on tde number of venues in eating, shopping, transportation category around tde location. Stakeholder also provide his favorite list of cinema to furtder explain what tde "best location" is. Content-based filtering machine learning technique is tde most suitable metdod to resolve tde problem. It combines stakeholder's preference and cinema profile to make tde recommendation result.
+tde stakeholder's problem is resolved. Stakeholder wants to find the best place to build a new cinema in Hong Kong, and the factors of "best location" is based on the number of venues in eating, shopping, transportation category around the location. Stakeholder also provide his favorite list of cinema to furtder explain what the "best location" is. Content-based filtering machine learning technique is the most suitable metdod to resolve the problem. It combines stakeholder's preference and cinema profile to make the recommendation result.
 
-tde 5 target locations of new cinema may not be a good choices. As tde weighting matrix is developed, I can quickly pick otder locations and make tde recommendation again.
+tde 5 target locations of new cinema may not be a good choices. As the weighting matrix is developed, I can quickly pick otder locations and make the recommendation again.
 
