@@ -302,6 +302,10 @@ The target locations (yellow circle) of new cinema are not near to main road.
 
 Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In this case, I am going to try to figure out the boss's favourite new cinema location by counting number of nearby venues and ratings given.
 
+Following diagram explain the steps to create the recommendation
+![content-base-filtering](content-base-filtering.PNG)
+
+
 1. Normalize the values of venues dataframe by using MinMaxScaler method and display the first 5 records
 
     |Cinema Name|Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
@@ -312,7 +316,7 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In thi
     |Broadway Circuit - HOLLYWOOD|0.083333|0.206897|0.000000|0.333333|0.142857|
     |Broadway Circuit - KINGSWOOD GINZA|0.000000|0.068966|0.000000|0.000000|0.000000|
 
-2. Join above data with boss's favourite list.
+2. **Boss Profile** - Join above data with boss's favourite list.
 
     ||Arts & Entertainment|Bus Stop|Food|Metro Station|Shop & Service|
     |--- |--- |--- |--- |--- |--- |
@@ -323,7 +327,7 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In thi
     |4|0.666667|0.413793|0.296296|0.333333|0.678571|
     |5|0.000000|0.103448|0.074074|0.333333|0.357143|
 
-3. Dot product to get the weight of rating on each category according to stakeholder's favourite list
+3. **Recommendation Component** - Dot product to get the weight of rating on each category according to stakeholder's favourite list.
 
     |Category|Weighted Rating|
     |---|---|
@@ -343,7 +347,7 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In thi
     |L4|0.083333|0.275862|0.074074|0.333333|0.107143|
     |L5|0.000000|0.413793|0.148148|0.666667|0.357143|
 
-5. With the boss's profile and the complete list of cinemas and their venues count in hand, I am going to take the weighted average of every location based on the profile and recommend the top location that most satisfy it. Following table shows the estimated rating of 5 target locations
+5. **Recommendation List** - With the boss's profile and the complete list of cinemas and their venues count in hand, I am going to take the weighted average of every location based on the profile and recommend the top location that most satisfy it. Following table shows the estimated rating of 5 target locations
 
     ||Location|Address|Latitude|Longitude|Rating|
     |--- |--- |--- |--- |--- |--- |
