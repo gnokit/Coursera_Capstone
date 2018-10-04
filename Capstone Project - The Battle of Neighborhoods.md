@@ -1,4 +1,4 @@
-# Recommend A New Cinema Location In Hong Kong
+# Find Location to Build New Cinema in Hong Kong
 Capstone Project - The Battle of Neighbourhoods
 
 ## Introduction
@@ -343,17 +343,20 @@ Now, let's use __Content-Based__ or __Item-Item recommendation systems__. In thi
     |L4|0.083333|0.275862|0.074074|0.333333|0.107143|
     |L5|0.000000|0.413793|0.148148|0.666667|0.357143|
 
+5. With the boss's profile and the complete list of cinemas and their venues count in hand, I am going to take the weighted average of every location based on the profile and recommend the top location that most satisfy it. Following table shows the estimated rating of 5 target locations
+
+    ||Location|Address|Latitude|Longitude|Rating|
+    |--- |--- |--- |--- |--- |--- |
+    |4|L5|Tsuen Fung Centre Shopping Arcade, Tsuen Wan|22.372112|114.119317|0.372980|
+    |2|L3|Un Chau Shopping Centre, Cheung Sha Wan|22.337280|114.156457|0.234543|
+    |3|L4|Prosperity Millennia Plaza, North Point|22.291698|114.208168|0.187982|
+    |1|L2|Tuen Mun Ferry, Tuen Mun|22.371780|113.966039|0.025860|
+    |0|L1|Sau Mau Ping Shopping Centre, Sau Mau Ping|22.319503|114.232187|0.009726|
+
+
 ## Results
 
-With the boss's profile and the complete list of cinemas and their venues count in hand, I am going to take the weighted average of every location based on the profile and recommend the top location that most satisfy it. Following table shows the estimated rating of 5 target locations
 
-||Location|Address|Latitude|Longitude|Rating|
-|--- |--- |--- |--- |--- |--- |
-|4|L5|Tsuen Fung Centre Shopping Arcade, Tsuen Wan|22.372112|114.119317|0.372980|
-|2|L3|Un Chau Shopping Centre, Cheung Sha Wan|22.337280|114.156457|0.234543|
-|3|L4|Prosperity Millennia Plaza, North Point|22.291698|114.208168|0.187982|
-|1|L2|Tuen Mun Ferry, Tuen Mun|22.371780|113.966039|0.025860|
-|0|L1|Sau Mau Ping Shopping Centre, Sau Mau Ping|22.319503|114.232187|0.009726|
 
     I should recommend the location "L5" of address "Tsuen Fung Centre Shopping Arcade, Tsuen Wan" to the stakeholder.
 
